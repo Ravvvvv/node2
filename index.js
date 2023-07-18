@@ -11,15 +11,39 @@ fs.readdir(path.join(__dirname, 'users'), function (err, files) {
         console.log(files);
         // odczytujemy plik z dokumentow za pomoca fs.readdir
 
-        files.forEach(function (file) {
+        files.forEach(function (file,) {
             // 'utf-8' pozwala zapisac dane w metodzie json bez pisanai tego
-            fs.readFile(path.join(__dirname, 'users', file), function (err, data) {
+            fs.readFile(path.join(__dirname, 'users', file), 'utf8', function (err, data) {
                 if (err) {
                     console.log(err);
                 } else {
                     console.log(JSON.parse(data));
 
                     ////////////////
+                    const users = JSON.parse(data)
+                    users.forEach((user, index) => {
+                        const userData = JSON.stringify(user)
+                        const fileName = `uzytkownik${index + 1}.txt`;
+                        const filePath = path.join(__dirname, 'users2', fileName);
+
+
+
+
+
+
+
+                        
+                        fs.writeFile(filePath, userData, function (err) {
+                            if (err) {
+                                console.log(err);
+                            } else {
+                                console.log('Zapisano dane użytkownika do pliku: ' + path.join(__dirname, 'users2', fileName, `${user.id}-${user.name}-${user.address.street}-${user.address.zipcode}-${user.address.city}-${user.phone}.txt`));
+                            }
+                        })
+
+
+
+                    })
 
 
 
@@ -39,6 +63,7 @@ fs.readdir(path.join(__dirname, 'users'), function (err, files) {
                 }
                 console.log(err);
             } else {
+
                 console.log('Stworzono folder');
             }
 
