@@ -22,17 +22,23 @@ fs.readdir(path.join(__dirname, 'users'), function (err, files) {
                     ////////////////
                     const users = JSON.parse(data)
                     users.forEach((user, index) => {
+
                         const userData = JSON.stringify(user)
-                        const fileName = `uzytkownik${index + 1}.txt`;
-                        const filePath = path.join(__dirname, 'users2', fileName);
-
-
-
-
-
-
 
                         
+                        const fileName = `uzytkownik${index + 1}.txt`;
+                        // pod stala dajemy nawe plus index zeby dodawzc w odzielnym pliku zawartosc kolekcji zworconej 
+                        // w userdata
+                        const filePath = path.join(__dirname, 'users2', fileName);
+                        // stala ktora sklada sie z pliku users2 i filename zostaje wkoprzystna to  zeby zapisac je  do pliku o
+
+
+
+
+
+
+
+
                         fs.writeFile(filePath, userData, function (err) {
                             if (err) {
                                 console.log(err);
